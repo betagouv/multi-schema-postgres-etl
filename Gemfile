@@ -4,7 +4,7 @@ ruby "3.3.3"
 
 source "https://rubygems.org"
 
-gem "activerecord", "~> 7.1"
+gem "activerecord", "~> 7.2"
 gem "pg", "~> 1.5"
 gem "dotenv", "~> 3.1"
 

@@ -44,7 +44,7 @@ Le user Postgres de la base remplie par l’ETL utilisé par Metabase n’a pas 
 Depuis votre terminal, avec scalingo-cli configuré et loggé vous pouvez lancer :
 
 ```shell
-bundle exec ruby trigger_detached_run.rb rdvsp
+bundle exec ruby trigger_detached_run.rb --app rdvsp
 ```
 
 Des jobs lancent ces commandes toutes les nuits pour les trois apps, cf /cron.json

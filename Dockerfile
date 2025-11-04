@@ -1,4 +1,4 @@
-FROM ruby:3.3.3-slim
+FROM ruby:3.3.10-slim
 
 # Add PostgreSQL repository for version 16
 RUN apt-get update && apt-get install -y gnupg2 lsb-release wget \

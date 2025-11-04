@@ -13,7 +13,7 @@ end.parse!
 app = options[:app]
 raise ArgumentError, "App option is required" if app.nil?
 
-if APPS.exclude?(app)
+unless APPS.include?(app)
   raise ArgumentError, "App must be one of: #{APPS.join(', ')}"
 end
 

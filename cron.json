@@ -1,0 +1,13 @@
+{
+  "jobs": [
+    {
+      "command": "0 0 * * 0-4 bundle exec ruby trigger_detached_run.rb rdvsp"
+    },
+    {
+      "command": "0 1 * * 0-4 bundle exec ruby trigger_detached_run.rb rdvi"
+    },
+    {
+      "command": "0 2 * * 0-4 bundle exec ruby trigger_detached_run.rb rdvs"
+    }
+  ]
+}

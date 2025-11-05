@@ -41,6 +41,9 @@ GEM
     minitest (5.25.5)
     pg (1.5.6)
     securerandom (0.4.1)
+    sentry-ruby (6.1.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -54,6 +57,7 @@ DEPENDENCIES
   anonymizer!
   dotenv (~> 3.1)
   pg (~> 1.5)
+  sentry-ruby
 
 RUBY VERSION
    ruby 3.3.10p183

@@ -33,7 +33,7 @@ begin
 
   # scalingo is auto logged in via environment variable SCALINGO_API_TOKEN
 
-  command = %[scalingo --region osc-secnum-fr1 --app rdv-service-public-etl run --detached "bundle exec ruby main.rb --app #{app}"]
+  command = %[scalingo --region osc-secnum-fr1 --app rdv-service-public-etl run --detached "bundle exec ruby main.rb --from-cron --app #{app}"]
 
   puts "Executing command: #{command}…"
   res = system(command)

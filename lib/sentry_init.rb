@@ -23,7 +23,7 @@ class SentryMonitorHelper
     @cron_exp = cron_exp
   end
 
-  def slug = "etl-production-#{@app}"
+  def slug = "etl-nightly-#{@app}"
 
   def monitor_config
     @config ||= Sentry::Cron::MonitorConfig.from_crontab(

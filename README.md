@@ -41,15 +41,13 @@ Le user Postgres de la base remplie par l’ETL utilisé par Metabase n’a pas 
 
 ### Hébergeur Scalingo
 
+Depuis votre terminal, avec scalingo-cli configuré et loggé vous pouvez lancer :
+
 ```shell
-scalingo --region osc-secnum-fr1 --app rdv-service-public-etl-staging run --detached "bundle exec ruby main.rb --app rdvi"
+bundle exec ruby trigger_detached_run.rb --app rdvsp
 ```
 
-Des CRON jobs réguliers seront bientôt configurés pour lancer ça.
-
-### Hébergeur Scaleway
-
-TODO
+Des jobs lancent ces commandes toutes les nuits pour les trois apps, cf /cron.json
 
 ## Usage en local
 

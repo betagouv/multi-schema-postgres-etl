@@ -1,7 +1,7 @@
 require 'dotenv'
 Dotenv.load
 
-require_relative "lib/sentry_init" # init here so exceptions in this script are monitored
+require_relative "lib/sentry_init"
 
 begin
 

@@ -9,7 +9,7 @@ end
 def get_sentry_monitor_helpers
   crontab = JSON.parse(File.read(File.join(File.dirname(__FILE__), '../cron.json')))
   %w[rdvsp rdvs rdvi].to_h do |app|
-    cron_item = crontab["jobs"].find { _1["command"].include?("--app #{app}") }
+    cron_item = crontab["jobs"].find { _1["command"].end_with?("--app #{app}") }
     cron_exp = cron_item["command"].split("bundle")[0]
     [app, SentryMonitorHelper.new(app:, cron_exp:)]
   end

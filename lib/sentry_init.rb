@@ -28,8 +28,8 @@ class SentryMonitorHelper
   def monitor_config
     @config ||= Sentry::Cron::MonitorConfig.from_crontab(
       @cron_exp,
-      checkin_margin: 10,
-      max_runtime: @app == "rdvs" ? 110 : 50,
+      checkin_margin: 30,
+      max_runtime: @app == "rdvs" ? 130 : 50,
       timezone: "UTC"
     )
   end

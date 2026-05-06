@@ -8,15 +8,16 @@ require_relative 'utils'
 class Etl
   include Utils
 
-  attr_reader :app, :etl_db_url, :origin_db_url, :config_path, :metabase_username
+  attr_reader :app, :etl_db_url, :origin_db_url, :config_path, :metabase_username, :schema_reader_username
 
-  def initialize(app:, etl_db_url:, origin_db_url:, config_path:, metabase_username:)
+  def initialize(app:, etl_db_url:, origin_db_url:, config_path:, metabase_username:, schema_reader_username: nil)
     @app = app
 
     @etl_db_url = etl_db_url
     @origin_db_url = origin_db_url
     @config_path = config_path
     @metabase_username = metabase_username
+    @schema_reader_username = schema_reader_username
   end
 
   def run
@@ -96,6 +97,10 @@ class Etl
     run_sql_command %(SELECT clone_schema('public', '#{target_schema}', TRUE);)
     run_sql_command %(GRANT USAGE ON SCHEMA #{target_schema} TO #{metabase_username};)
     run_sql_command %(GRANT SELECT ON ALL TABLES IN SCHEMA #{target_schema} TO #{metabase_username};)
+    if schema_reader_username
+      run_sql_command %(GRANT USAGE ON SCHEMA #{target_schema} TO #{schema_reader_username};)
+      run_sql_command %(GRANT SELECT ON ALL TABLES IN SCHEMA #{target_schema} TO #{schema_reader_username};)
+    end
     run_sql_script 'clean_public_schema.sql'
   ensure
     ActiveRecord::Base.connection_handler.clear_all_connections!

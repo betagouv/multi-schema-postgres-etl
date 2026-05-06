@@ -25,6 +25,14 @@ begin
     "rdvsp" => "RDV_SERVICE_PUBLIC_DB_URL"
   }
 
+  # unlike metabase_username which has access to all schemas, each schema reader is a db user that
+  # only has access to its own schema
+  schema_reader_username_list = {
+    "rdvi" => "RDV_INSERTION_SCHEMA_READER_USERNAME",
+    "rdvs" => "RDV_SOLIDARITES_SCHEMA_READER_USERNAME",
+    "rdvsp" => "RDV_SERVICE_PUBLIC_SCHEMA_READER_USERNAME"
+  }
+
   app = ENV["APP"]
   from_cron = false
   dry_run = false
@@ -81,12 +89,13 @@ begin
   origin_db_url = ENV[origin_db_url_env_var]
   etl_db_url = ENV[etl_db_url_env_var]
   metabase_username = ENV[metabase_username_env_var]
+  schema_reader_username = ENV[schema_reader_username_list[app]] if schema_reader_username_list.key?(app)
 
   if dry_run
     puts "pretend working…"
     sleep 2
   else
-    Etl.new(app:, etl_db_url:, origin_db_url:, config_path:, metabase_username:).run
+    Etl.new(app:, etl_db_url:, origin_db_url:, config_path:, metabase_username:, schema_reader_username:).run
   end
 
   sentry_monitor_helper.capture_end_successful if from_cron

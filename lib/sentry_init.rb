@@ -16,6 +16,8 @@ def get_sentry_monitor_helpers
 end
 
 class SentryMonitorHelper
+  MAX_RUNTIME_PER_APP = { "rdvsp" => 50, "rdvi" => 120, "rdvs" => 130 }.freeze
+
   attr_reader :check_in_id
 
   def initialize(app:, cron_exp:)
@@ -29,7 +31,7 @@ class SentryMonitorHelper
     @config ||= Sentry::Cron::MonitorConfig.from_crontab(
       @cron_exp,
       checkin_margin: 30,
-      max_runtime: @app == "rdvs" ? 130 : 50,
+      max_runtime: MAX_RUNTIME_PER_APP.fetch(@app),
       timezone: "UTC"
     )
   end

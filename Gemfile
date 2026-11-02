@@ -4,7 +4,7 @@ ruby "3.4.12"
 
 source "https://rubygems.org"
 
-gem "activerecord", "~> 7.1"
+gem "activerecord", "~> 8.1"
 gem "pg", "~> 1.5"
 gem "dotenv", "~> 3.1"
 gem "sentry-ruby"

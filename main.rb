@@ -90,9 +90,9 @@ begin
   metabase_username = ENV[metabase_username_env_var]
   schema_reader_username = ENV[schema_reader_username_list[app]] if schema_reader_username_list.key?(app)
 
-  pg_version = ENV.fetch("PG_VERSION", "16")
+  pg_client_version = ENV.fetch("PG_VERSION_FOR_SCALINGO_DB_CLIENT", "16")
   # only useful on Scalingo apps
-  run_command "dbclient-fetcher pgsql #{pg_version}" if find_executable('dbclient-fetcher')
+  run_command "dbclient-fetcher pgsql #{pg_client_version}" if find_executable('dbclient-fetcher')
 
   if dry_run
     puts "pretend working…"

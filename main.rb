@@ -33,6 +33,12 @@ begin
     "rdvsp" => "RDV_SERVICE_PUBLIC_SCHEMA_READER_USERNAME"
   }
 
+  pg_version_list = {
+    "rdvi" => "RDV_INSERTION_PG_VERSION_FOR_SCALINGO_DB_CLIENT",
+    "rdvs" => "RDV_SOLIDARITES_PG_VERSION_FOR_SCALINGO_DB_CLIENT",
+    "rdvsp" => "RDV_SERVICE_PUBLIC_PG_VERSION_FOR_SCALINGO_DB_CLIENT",
+  }
+
   app = ENV["APP"]
   from_cron = false
   dry_run = false
@@ -90,7 +96,7 @@ begin
   metabase_username = ENV[metabase_username_env_var]
   schema_reader_username = ENV[schema_reader_username_list[app]] if schema_reader_username_list.key?(app)
 
-  pg_client_version = ENV.fetch("PG_VERSION_FOR_SCALINGO_DB_CLIENT", "16")
+  pg_client_version = ENV.fetch(pg_version_list[app], "16")
   # only useful on Scalingo apps
   run_command "dbclient-fetcher pgsql #{pg_client_version}" if find_executable('dbclient-fetcher')
 

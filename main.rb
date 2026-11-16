@@ -74,7 +74,6 @@ begin
     raise "La variable d'environnement CONFIG_PATH pointe vers un fichier inexistant"
   end
 
-
   etl_db_url_env_var = "ETL_DB_URL"
   metabase_username_env_var = "METABASE_USERNAME"
 
@@ -90,6 +89,10 @@ begin
   etl_db_url = ENV[etl_db_url_env_var]
   metabase_username = ENV[metabase_username_env_var]
   schema_reader_username = ENV[schema_reader_username_list[app]] if schema_reader_username_list.key?(app)
+
+  pg_client_version = ENV.fetch("PG_VERSION_FOR_SCALINGO_DB_CLIENT", "16")
+  # only useful on Scalingo apps
+  run_command "dbclient-fetcher pgsql #{pg_client_version}" if find_executable('dbclient-fetcher')
 
   if dry_run
     puts "pretend working…"
